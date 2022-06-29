@@ -1,0 +1,13 @@
+.container {
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#question {
+    font-size: 32px;
+}
+
+#answer {
+    background-color: white;
+}
