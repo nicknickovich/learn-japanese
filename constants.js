@@ -1,4 +1,6 @@
 export {
+    HIRAGANA_START,
+    HIRAGANA_END,
     KATAKANA_START,
     KATAKANA_END
 }
