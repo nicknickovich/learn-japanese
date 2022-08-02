@@ -114,10 +114,12 @@ const changeToHiragana = (input) => {
                 result = result.slice(0, result.length - 3).concat(quadruple_hiragana[chunk]);
                 remember = "";
             } else {
-                remember = "";
+                remember += chunk;
+                result += letter;
             }
         } else {
-            result += remember + letter;
+            remember += letter;
+            result += letter;
         }
     }
     return result;
