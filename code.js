@@ -171,7 +171,7 @@ window.onload = () => {
     setQuestion();
     document.getElementById("answer").addEventListener("keyup", (e) => {
         if (e.code === "Enter") {
-            if (answer.style.backgroundColor === "white") {
+            if (!(answer.style.backgroundColor === "green")) {
                 checkInput();
             } else {
                 setQuestion();
