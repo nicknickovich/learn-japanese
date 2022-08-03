@@ -165,12 +165,39 @@ const resetInput = () => {
     answer.style.backgroundColor = "white";
 }
 
+const changeIntoUkrainian = (input) => {
+    const kanaMappings = {
+        ...single_katakana,
+        ...double_katakana,
+        ...triple_katakana,
+        ...quadruple_katakana
+    };
+    console.log(kanaMappings);
+    const invertedMappings = {};
+    for (const [key, value] of Object.entries(kanaMappings)) {
+        invertedMappings[value] = [key];
+    }
+
+    return invertedMappings[input];
+}
+
+const showAnswerHint = () => {
+    const question = document.getElementById("question").innerText;
+    const correctAnswer = document.getElementById("answer-hint");
+    correctAnswer.innerText = changeIntoUkrainian(question);
+}
+
+const clearAnswerHint = () => {
+    document.getElementById("answer-hint").innerText = "";
+}
+
 window.onload = () => {
     document.getElementById("ukr").checked = true;
     const answer = document.getElementById("answer");
     answer.style.backgroundColor = "white";
     answer.focus();
     setQuestion();
+    document.getElementById("show-answer").addEventListener("click", showAnswerHint)
     document.getElementById("answer").addEventListener("keyup", (e) => {
         if (e.code === "Enter") {
             if (!(answer.style.backgroundColor === "green")) {
@@ -178,6 +205,7 @@ window.onload = () => {
             } else {
                 setQuestion();
                 resetInput();
+                clearAnswerHint();
             }
         }
     });
