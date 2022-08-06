@@ -130,12 +130,12 @@ const changeToHiragana = (input) => {
 
 const changeInputToKatakana = () => {
     const inputElem = document.getElementById("answer");
-    inputElem.value = changeToKatakana(inputElem.value);
+    inputElem.value = changeToKatakana(inputElem.value.toLowerCase());
 }
 
 const changeInputToHiragana = () => {
     const inputElem = document.getElementById("answer");
-    inputElem.value = changeToHiragana(inputElem.value);
+    inputElem.value = changeToHiragana(inputElem.value.toLowerCase());
 }
 
 const getRandomNumber = (number) => {
@@ -163,7 +163,7 @@ const changeHiraganaToKatakana = (input) => {
 
 const checkInput = () => {
     const answerField = document.getElementById("answer");
-    const answer = answerField.value.replace("г", "ґ");
+    const answer = answerField.value.toLowerCase().replace("г", "ґ");
     const correctAnswer = document.getElementById("question").innerText;
     if (changeToKatakana(answer) === correctAnswer
         || changeHiraganaToKatakana(answer) === correctAnswer) {
