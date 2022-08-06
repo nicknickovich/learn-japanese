@@ -3,7 +3,8 @@ import {
     single_katakana, double_katakana,
     triple_katakana, quadruple_katakana,
     single_hiragana, double_hiragana,
-    triple_hiragana, quadruple_hiragana
+    triple_hiragana, quadruple_hiragana,
+    hiragana_to_katakana
 } from "./mappings.js";
 import {
     HIRAGANA_START, HIRAGANA_END,
@@ -150,11 +151,22 @@ const setQuestion = () => {
     q.innerText = pickCharacter();
 }
 
+const changeHiraganaToKatakana = (input) => {
+    let result = "";
+    for (const letter of Array.from(input)) {
+        if (isCharInRange(letter, HIRAGANA_START, HIRAGANA_END)) {
+            result += hiragana_to_katakana[letter];
+        }
+    }
+    return result;
+}
+
 const checkInput = () => {
     const answerField = document.getElementById("answer");
     const answer = answerField.value.replace("г", "ґ");
     const correctAnswer = document.getElementById("question").innerText;
-    if (changeToKatakana(answer) === correctAnswer) {
+    if (changeToKatakana(answer) === correctAnswer
+        || changeHiraganaToKatakana(answer) === correctAnswer) {
         answerField.style.backgroundColor = "green";
     } else {
         answerField.style.backgroundColor = "red";
