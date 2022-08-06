@@ -209,23 +209,51 @@ const clearAnswerHint = () => {
     document.getElementById("answer-hint").innerText = "";
 }
 
+const resetQuestion = () => {
+    setQuestion();
+    resetInput();
+    clearAnswerHint();
+    document.getElementById("check-answer").innerText = "Перевірити";
+    document.getElementById("show-answer").innerText = "Підказка";
+}
+
+const checkAnswer = () => {
+    const answer = document.getElementById("answer");
+    if (!(answer.value === "")) {
+        if (!(answer.style.backgroundColor === "green")) {
+            checkInput();
+        } else {
+            resetQuestion();
+        }
+    }
+    answer.focus();
+}
+
 window.onload = () => {
     document.getElementById("ukr").checked = true;
     const answer = document.getElementById("answer");
     answer.style.backgroundColor = "white";
     answer.focus();
     setQuestion();
-    document.getElementById("show-answer").addEventListener("click", showAnswerHint)
+    document.getElementById("show-answer").addEventListener("click", function () {
+        showAnswerHint();
+        if (this.innerText === "Підказка") {
+            this.innerText = "Сховати";
+        } else {
+            this.innerText = "Підказка";
+        }
+    })
     document.getElementById("answer").addEventListener("keyup", (e) => {
         if (e.code === "Enter") {
-            if (!(answer.style.backgroundColor === "green")) {
-                checkInput();
-            } else {
-                setQuestion();
-                resetInput();
-                clearAnswerHint();
-            }
+           checkAnswer();
         }
+    });
+    document.getElementById("check-answer").addEventListener("click", function () {
+        checkAnswer();
+        if (this.innerText === "Перевірити"
+            && answer.style.backgroundColor === "green") {
+                this.innerText = "Далі";
+            }
     });
     document.getElementById("ukr").addEventListener("change", e => {
         answer.removeEventListener("keyup", changeInputToKatakana);
