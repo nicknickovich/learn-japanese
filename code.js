@@ -174,7 +174,6 @@ const changeIntoUkrainian = (input) => {
         ...triple_katakana,
         ...quadruple_katakana
     };
-    console.log(kanaMappings);
     const invertedMappings = {};
     for (const [key, value] of Object.entries(kanaMappings)) {
         invertedMappings[value] = [key];
@@ -186,7 +185,12 @@ const changeIntoUkrainian = (input) => {
 const showAnswerHint = () => {
     const question = document.getElementById("question").innerText;
     const correctAnswer = document.getElementById("answer-hint");
-    correctAnswer.innerText = changeIntoUkrainian(question);
+    if (correctAnswer.innerText === "") {
+        correctAnswer.innerText = changeIntoUkrainian(question);
+    } else {
+        correctAnswer.innerText = "";
+    }
+    document.getElementById("answer").focus()
 }
 
 const clearAnswerHint = () => {
